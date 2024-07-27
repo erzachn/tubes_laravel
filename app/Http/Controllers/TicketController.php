@@ -37,9 +37,10 @@ class TicketController extends Controller
     public function index()
     {
         // Ambil tiket yang dipesan oleh pengguna yang sedang login
-        $tickets = Ticket::where('user_id', Auth::id())->get();
+        // $tickets = Ticket::where('user_id', Auth::id())->get();
 
-        return view('tickets.index', compact('tickets'));
+        // return view('tickets.index', compact('tickets'));
+        return view('perpus.buku');
     }
 
     public function destroy($id)

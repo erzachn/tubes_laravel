@@ -15,8 +15,8 @@
         </div>
 
         <button type="submit" class="btn btn-success mt-2">Pesan Tiket</button>
-        <a href="{{ route('films.index') }}" class="btn btn-secondary mt-2">Kembali ke Daftar Film</a>
+        <a href="{{ route('') }}" class="btn btn-secondary mt-2">Kembali ke Daftar Film</a>
     </form>
 
-    
+
 @endsection

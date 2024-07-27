@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FilmController;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TicketController;
@@ -22,20 +22,45 @@ Route::post('/login', [LoginController::class, 'login']);
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/', [FilmController::class, 'index'])->name('films.index');
+Route::get('/', [BookController::class, 'index'])->name('books.index');
 Route::get('/tickets/create/{film}', [TicketController::class, 'create'])->middleware('auth')->name('tickets.create');
 Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store');
 
-Route::get('/films/{id}', [FilmController::class, 'show'])->name('films.show');
+Route::get('/books/{id}', [BookController::class, 'show'])->name('books.show');
 
-Route::get('/my-tickets', [TicketController::class, 'index'])->middleware('auth')->name('my-tickets');
+Route::get('/my-books', [TicketController::class, 'index'])->middleware('auth')->name('my-books');
 
 Route::delete('/tickets/{id}', [TicketController::class, 'destroy'])->name('tickets.destroy');
 
-Route::get('/admin/films/create', [FilmController::class, 'create'])->middleware('auth')->name('films.create');
-Route::post('/admin/films', [FilmController::class, 'store'])->name('films.store');
+Route::get('/admin/films/create', [BookController::class, 'create'])->middleware('auth')->name('films.create');
+Route::post('/admin/films', [BookController::class, 'store'])->name('books.store');
 
 
 Route::get('/admin/tickets', [AdminController::class, 'index'])->name('admin.tickets');
 
-Route::delete('/films/{id}', [FilmController::class, 'destroy'])->name('films.destroy');
+Route::delete('/films/{id}', [BookController::class, 'destroy'])->name('books.destroy');
+
+
+// Perpus
+Route::get('/perpus', function() {return view('perpus.index');})->name('perpus');
+
+// Login
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+// END Login
+
+Route::get('/perpus/buku', function() {return view('perpus.buku');});
+Route::get('/perpus/caribuku', function() {return view('perpus.caribuku', ['films' => []]);});
+Route::get('/perpus/bukupengunjung', function() {return view('perpus.bukupengunjung');});
+Route::get('/perpus/admin', function() {return view('perpus.admin');});
+Route::get('/perpus/setadmin', function() {return view('perpus.setadmin');});
+Route::get('/perpus/crewadmin', function() {return view('perpus.crewadmin');});
+Route::get('/perpus/lapinjamadmin', function() {return view('perpus.lapinjamadmin');});
+Route::get('/perpus/databukuadmin', function() {return view('perpus.databukuadmin');});
+Route::get('/perpus/peminjamanadmin', function() {return view('perpus.peminjamanadmin');});

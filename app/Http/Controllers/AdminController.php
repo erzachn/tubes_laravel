@@ -11,7 +11,7 @@ class AdminController extends Controller
     public function index(Request $request)
     {
         $query = $request->input('search');
-        $tickets = Ticket::with('film', 'user') // Memuat relasi user
+        $tickets = Book::with('book', 'user') // Memuat relasi user
             ->when($query, function ($queryBuilder) use ($query) {
                 return $queryBuilder->whereHas('user', function ($q) use ($query) {
                     $q->where('name', 'like', "%{$query}%"); // Menggunakan nama pengguna
@@ -19,8 +19,8 @@ class AdminController extends Controller
             })
             ->get();
 
-        return view('admin.tickets.index', compact('tickets', 'query'));
+        return view('admin.books.index', compact('books', 'query'));
     }
 
-    
+
 }
