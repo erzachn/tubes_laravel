@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Film;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class FilmController extends Controller
 {
@@ -16,7 +17,13 @@ class FilmController extends Controller
 
     public function create()
     {
-        return view('admin.films.create');
+        if (auth()->check() && auth()->user()->is_admin) {
+            # code...
+            return view('admin.films.create');
+        }
+        else {
+            return redirect()->route('films.index');
+        }
     }
 
     public function show($id)

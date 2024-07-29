@@ -32,7 +32,9 @@ Route::get('/my-tickets', [TicketController::class, 'index'])->middleware('auth'
 
 Route::delete('/tickets/{id}', [TicketController::class, 'destroy'])->name('tickets.destroy');
 
-Route::get('/admin/films/create', [FilmController::class, 'create'])->middleware('auth')->name('films.create');
+Route::get('/admin/films/create', [FilmController::class, 'create'])
+    ->middleware('auth')
+    ->name('films.create');
 Route::post('/admin/films', [FilmController::class, 'store'])->name('films.store');
 
 
